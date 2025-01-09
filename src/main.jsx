@@ -11,6 +11,7 @@ import Vote from "./assets/components/Vote.jsx";
 import TotalVotes from "./assets/components/TotalVotes.jsx";
 import VotingContext from "./assets/components/VotingContext.jsx";
 import LayOut from "./assets/components/LayOut.jsx";
+import Dashboard from "./assets/components/Dashboard.jsx";
 const router = createBrowserRouter([
   {
   path: "/",
@@ -21,7 +22,8 @@ const router = createBrowserRouter([
       { path: "/users", element: <Voters /> },
       { path: '/update/:id', element:<Update />},
       {path: '/vote', element: <Vote />},
-      {path: '/total', element: <TotalVotes />}
+      {path: '/total', element: <TotalVotes />},
+      {path: '/dashboard/:id', element: <Dashboard />},
   ]
 }
   

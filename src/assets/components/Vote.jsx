@@ -1,4 +1,4 @@
-import  {  useState } from 'react';
+import  {  useState, useEffect } from 'react';
 import { toast, ToastContainer } from "react-toastify";
 import Loader from './Loader';
 
@@ -7,6 +7,16 @@ const Vote = () => {
         voterId:"",
         politicalParty:""
     })
+
+    const [vid, setVid] = useState("Expired Voter Id");
+
+
+    useEffect(() => {
+      setVid(localStorage.getItem("vid"))
+    }, [vid])
+    
+    
+
 const handleChange = (e)=>{
 const {name, value} = e.target
 setVoting({...voting, [name]: value})
@@ -44,7 +54,10 @@ setVoting({...voting, [name]: value})
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
     <ToastContainer />
       { isLoading ? <Loader /> :
-   <form
+  <div>
+    <h2>Your Voter's ID is: {vid}</h2>
+
+<form
      onSubmit={handleVoting}
      className="max-w-lg w-full bg-white rounded-lg shadow-md p-6"
    >
@@ -102,6 +115,7 @@ setVoting({...voting, [name]: value})
        </button>
      </div>
    </form>
+  </div>
 }
  </div> 
   )

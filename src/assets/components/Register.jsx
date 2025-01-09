@@ -2,8 +2,11 @@
 import  { useContext, useState } from 'react';
 import { toast, ToastContainer } from "react-toastify";
 import Loader from './Loader';
+import { useNavigate } from "react-router-dom";
 import {VoteContext} from './VotingContext';
+
 const Register = () => {
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,19 +39,26 @@ const url = 'https://voting-app-8ug3.onrender.com'
            const data = await response.json()
            toast.success(data.message)
            setIsLoading(false)
-
-          } 
-          const data = await response.json()
-          setIsLoading(false)
-          toast.error(data.error)
-          console.log(data.error);
+            // navigate(`/dashboard/${data.newUser.voterId}`)
+            // console.log(data);
+            alert(`Your voter ID is ${data.newUser.voterId}. Keep it safe`)
+            localStorage.setItem("vid", data.newUser.voterId)
+            navigate('/vote')
+          } else {
+            const data = await response.json()
+            setIsLoading(false)
+            toast.error(data.error)
+            console.log(data.error);
+          }
+          
+         
           
     } catch (error) {
         console.log(error);
         
     }
   };
-
+  const navigate = useNavigate()
 
 
   return (

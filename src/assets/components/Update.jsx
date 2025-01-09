@@ -18,17 +18,23 @@ const [isLoading, setIsLoading] = useState(false)
   const handleChange = (e)=>{
 const {name, value} = e.target
 
-setFillData({...fillData, [name]: value})
+  setFillData(( (prefill)=> {
+    return {...prefill, [name]: value}
+  } ))
   }
 
 const url = 'https://voting-app-8ug3.onrender.com'
 
 const fecthData = async ()=>{
  try {
-    const response = await fetch(`${url}/${id}`)
+    const response = await fetch(`${url}/update/${id}`)
+    console.log(response);
+    
     if (response.ok){
        const data = await response.json()
         setFillData(data)
+        console.log(data);
+        
     } else {
 
         toast.error('Fail to fetch user data')
@@ -172,7 +178,8 @@ try {
 
        <button
          type="submit"
-         className="w-full bg-blue-500 text-white font-semibold p-2 rounded-md hover:bg-blue-600 transition"
+         className="w-full bg-blue-500 text-white font-semibold p-2 
+         rounded-md hover:bg-blue-600 transition"
        >
          Update
        </button>
